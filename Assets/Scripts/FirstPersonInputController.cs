@@ -23,19 +23,12 @@ public class FirstPersonInputController : MonoBehaviour
 
     void Update()
     {
-        Look();
         Move();
+        Look();
     }
 
-    public void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-    }
-
-    public void OnLook(InputValue value)
-    {
-        lookInput = value.Get<Vector2>();
-    }
+    public void OnMove(InputValue value) => moveInput = value.Get<Vector2>();
+    public void OnLook(InputValue value) => lookInput = value.Get<Vector2>();
 
     public void OnJump(InputValue value)
     {
@@ -49,7 +42,6 @@ public class FirstPersonInputController : MonoBehaviour
             verticalVelocity = -2f;
 
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-
         verticalVelocity += gravity * Time.deltaTime;
 
         Vector3 velocity = move * moveSpeed;
@@ -65,6 +57,6 @@ public class FirstPersonInputController : MonoBehaviour
         cameraPitch -= lookInput.y * lookSensitivity;
         cameraPitch = Mathf.Clamp(cameraPitch, -80f, 80f);
 
-        cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+        cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
     }
 }
