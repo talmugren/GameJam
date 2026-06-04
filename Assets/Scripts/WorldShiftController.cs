@@ -6,19 +6,19 @@ public class WorldShiftController : MonoBehaviour
     public GameObject normalLight;
     public GameObject shiftLight;
     public GameObject darkObjects;
+    public GameObject darkGrungeOverlay;
 
-    private bool isShift;
+    public static bool IsDarkMode { get; private set; }
 
     public void OnShiftWorld(InputValue value)
     {
         if (!value.isPressed) return;
 
-        isShift = !isShift;
+        IsDarkMode = !IsDarkMode;
 
-        normalLight.SetActive(!isShift);
-        shiftLight.SetActive(isShift);
-        darkObjects.SetActive(isShift);
-
-        Debug.Log("SHIFT MODE: " + isShift);
+        if (normalLight != null) normalLight.SetActive(!IsDarkMode);
+        if (shiftLight != null) shiftLight.SetActive(IsDarkMode);
+        if (darkObjects != null) darkObjects.SetActive(IsDarkMode);
+        if (darkGrungeOverlay != null) darkGrungeOverlay.SetActive(IsDarkMode);
     }
 }
